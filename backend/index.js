@@ -24,7 +24,7 @@ const client = new MongoClient(uri, {
   },
 });
 
-let database, usercollection, classcollection, quizcollection, studentcollection, teachercollection, resultcollection, subjectcollection, admincollection, cartcollection, paymentcollection, appliedcollection;
+let database, usercollection, classcollection, coursecollection, studentcollection, teachercollection, resultcollection, subjectcollection, admincollection, cartcollection, paymentcollection, appliedcollection;
 
 async function connectToDatabase() {
   try {
@@ -82,9 +82,10 @@ app.get('/course',async(req,res)=>{
   res.send(result);
 })
 //get class by 
-app.get('/course', async(req,res)=>{
-  const query={owner_id:"64f7ad3e34fa9a001e4f7a11"};
-  const result=await coursecollation.find().toArray();
+app.get('/course/:owner_id', async(req,res)=>{
+  const owner_id=req.params.owner_id;
+  const query={owner_id:owner_id};
+  const result=await coursecollaction.find(query).toArray();
   res.send(result);
 })
 
